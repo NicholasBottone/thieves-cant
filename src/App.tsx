@@ -9,11 +9,8 @@ function App() {
   return (
     <>
       <h1>Thieve&rsquo;s Cant Translator</h1>
-      <input
-        type="textarea"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+      <textarea value={input} onChange={(e) => setInput(e.target.value)} />
+      <br />
       <button onClick={() => setInput(translateToEnglish(input))}>
         Translate to English
       </button>
