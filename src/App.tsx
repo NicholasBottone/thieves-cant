@@ -9,11 +9,7 @@ import DragonHead from "./assets/dragon-head.png";
 import DragonTail from "./assets/dragon-tail.png";
 
 import { translateToEnglish, translateToThievesCant } from "./utils/translate";
-
-type Result = {
-  translation: string;
-  translationPairs: { start: string; end: string }[];
-};
+import type { Result } from "./utils/result";
 
 function App() {
   const [translatingFromLanguage, setTranslatingFromLanguage] = useState<
@@ -21,6 +17,8 @@ function App() {
   >("english");
   const [inputText, setInputText] = useState("");
   const [output, setOutput] = useState<Result>();
+
+  console.log(output);
 
   const translatingToLanguage =
     translatingFromLanguage === "english" ? "thieves' cant" : "english";

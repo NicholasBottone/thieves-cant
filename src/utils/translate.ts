@@ -1,6 +1,8 @@
 import { syllabify } from "./syllabify";
 import { dictionary } from "./words";
 
+import type { Result } from "./result";
+
 const pronounMap: Record<string, string> = {
   I: "HUUUE",
   ME: "HUUUE",
@@ -116,7 +118,7 @@ const simpleSingleSyllableWords = [
   "MUST",
 ];
 
-export const translateToThievesCant = (input: string) => {
+export const translateToThievesCant = (input: string): Result => {
   input = input.toUpperCase();
 
   for (const [contraction, expansion] of Object.entries(contractionsMap)) {
@@ -147,6 +149,14 @@ export const translateToThievesCant = (input: string) => {
     }
 
     const syllables = syllabify(word);
+    if (!syllables) {
+      console.log(`Could not syllabify "${word}"`);
+      return {
+        translation: "",
+        translationPairs: [],
+        success: false,
+      };
+    }
 
     if (syllables.length === 1) {
       if (simpleSingleSyllableWords.includes(word)) {
@@ -172,7 +182,7 @@ export const translateToThievesCant = (input: string) => {
       const wordStarter =
         dictionary.find((word) =>
           word.startsWith(syllables[i].toLowerCase()),
-        ) ?? "oh-no!";
+        ) ?? syllables[i].toLowerCase();
       console.log(`Found word starter for "${syllables[i]}": ${wordStarter}`);
       translatedWord.push(wordStarter);
 
@@ -201,10 +211,11 @@ export const translateToThievesCant = (input: string) => {
   return {
     translation: translatedWords.join(" "),
     translationPairs,
+    success: true,
   };
 };
 
-export const translateToEnglish = (input: string) => {
+export const translateToEnglish = (input: string): Result => {
   input = input.toUpperCase();
   const words = input
     .split(/(\s+|[.,!?])/)
@@ -215,9 +226,6 @@ export const translateToEnglish = (input: string) => {
   for (let i = 0; i < words.length; i++) {
     let word = words[i];
     console.log(`Translating "${word}"...`);
-    // if (!word.trim() || /^[.,!?]$/.test(word)) {
-    //   continue;
-    // }
 
     const translatedWord = [];
 
@@ -276,7 +284,16 @@ export const translateToEnglish = (input: string) => {
     }
 
     // Multi-syllable words
-    const firstSyllable = syllabify(word)[0];
+    const syllables = syllabify(word);
+    if (!syllables) {
+      console.log(`Could not syllabify "${word}"`);
+      return {
+        translation: "",
+        translationPairs: [],
+        success: false,
+      };
+    }
+    const firstSyllable = syllables[0];
     translatedWord.push(firstSyllable.toLowerCase());
 
     const vowel = words[++i];
@@ -284,7 +301,16 @@ export const translateToEnglish = (input: string) => {
     const wordsLeft = vowels.indexOf(vowel) + 1;
     console.log(`Found vowel: ${vowel}, words left: ${wordsLeft}`);
     for (let j = 0; j < wordsLeft; j++) {
-      const nextSyllable = syllabify(words[++i])[0];
+      const syllables = syllabify(words[++i]);
+      if (!syllables) {
+        console.log(`Could not syllabify "${word}"`);
+        return {
+          translation: "",
+          translationPairs: [],
+          success: false,
+        };
+      }
+      const nextSyllable = syllables[0];
       word += ` ${nextSyllable}`;
       // if last syllable
       if (j === wordsLeft - 1) {
@@ -306,5 +332,6 @@ export const translateToEnglish = (input: string) => {
   return {
     translation: translatedWords.join(" "),
     translationPairs,
+    success: true,
   };
 };
