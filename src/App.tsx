@@ -93,7 +93,16 @@ function App() {
         </div>
       </div>
 
-      {/* <div className="rules-container">Rules</div> */}
+      <div className="rules-container">
+        <div className="rules-header-container">
+          <h2>Rules</h2>
+        </div>
+        <div className="rules-content-container">
+          Rule 1: Pronouns are cool!
+          <br />
+          Rule 2: Andrew is awesome!
+        </div>
+      </div>
     </>
   );
 }

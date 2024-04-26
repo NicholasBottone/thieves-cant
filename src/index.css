@@ -5,6 +5,10 @@
   --text-primary: #ffffff;
   --text-secondary: #000000;
   --text-tertiary: #d5d5d5;
+
+  --font-size-primary: 2rem;
+  --font-size-secondary: 1.5rem;
+  --font-size-tertiary: 1.25rem;
 }
 
 body {
@@ -12,10 +16,18 @@ body {
   background-color: var(--secondary-color);
 }
 
-h1 {
+h1,
+h2 {
   margin: 0;
   padding: 0;
-  font-size: 2rem;
+}
+
+h1 {
+  font-size: var(--font-size-primary);
+}
+
+h2 {
+  font-size: var(--font-size-secondary);
 }
 
 textarea::placeholder {
@@ -99,6 +111,7 @@ label:focus,
   .left-header {
     width: 48%;
     padding-left: 20px;
+    font-size: var(--font-size-secondary);
   }
 
   .middle-header {
@@ -111,11 +124,11 @@ label:focus,
   .right-header {
     width: 48%;
     padding-left: 20px;
+    font-size: var(--font-size-secondary);
   }
 }
 
 .translation-box-container {
-  /* z-index: 100; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -123,6 +136,7 @@ label:focus,
   gap: 4%;
   height: 60%;
   margin: 0 2rem;
+  font-size: var(--font-size-tertiary);
 }
 
 .translation-box {
@@ -172,5 +186,22 @@ label:focus,
 
 /* RULES CONTAINER */
 .rules-container {
-  border: 3px solid green;
+  padding: 1rem 2rem 0 2rem;
+}
+
+.rules-header-container {
+  background-color: var(--primary-color);
+  width: max-content;
+  padding: 5px 10px;
+
+  h2 {
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+}
+
+.rules-content-container {
+  border: 3px solid var(--primary-color);
+  padding: 12px 20px;
+  font-size: var(--font-size-tertiary);
 }
