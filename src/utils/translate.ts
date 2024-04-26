@@ -180,9 +180,16 @@ export const translateToThievesCant = (input: string): Result => {
 
     for (let i = 0; i < syllables.length - 1; i++) {
       const wordStarter =
-        dictionary.find((word) =>
-          word.startsWith(syllables[i].toLowerCase()),
-        ) ?? syllables[i].toLowerCase();
+        dictionary.find((dictWord) => {
+          if (dictWord.includes(word.toLowerCase())) {
+            return false;
+          }
+          const wordSyllables = syllabify(dictWord);
+          if (!wordSyllables) {
+            return false;
+          }
+          return wordSyllables[0].toLowerCase() === syllables[i].toLowerCase();
+        }) ?? syllables[i].toLowerCase();
       console.log(`Found word starter for "${syllables[i]}": ${wordStarter}`);
       translatedWord.push(wordStarter);
 
