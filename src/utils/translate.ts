@@ -77,6 +77,45 @@ const contractionsMap: Record<string, string> = {
 
 const vowels = ["A", "E", "I", "O", "U"];
 
+const simpleSingleSyllableWords = [
+  "A",
+  "AN",
+  "THE",
+  "AND",
+  "BUT",
+  "NOT",
+  "OR",
+  "FOR",
+  "NOR",
+  "SO",
+  "YET",
+  "TO",
+  "IN",
+  "ON",
+  "AT",
+  "BY",
+  "OF",
+  "WITH",
+  "AS",
+  "IS",
+  "WAS",
+  "ALL",
+  "HI",
+  "BYE",
+  "WHO",
+  "WHAT",
+  "WHEN",
+  "WHERE",
+  "WHY",
+  "HOW",
+  "WHICH",
+  "WHOM",
+  "MAY",
+  "MUCH",
+  "MORE",
+  "MUST",
+];
+
 export const translateToThievesCant = (input: string) => {
   input = input.toUpperCase();
 
@@ -108,7 +147,14 @@ export const translateToThievesCant = (input: string) => {
     const syllables = syllabify(word);
 
     if (syllables.length === 1) {
-      translatedWord.push(word.toLowerCase());
+      if (simpleSingleSyllableWords.includes(word)) {
+        translatedWord.push(word.toLowerCase());
+      } else {
+        translatedWord.push(
+          `y${word.toLowerCase().substring(1)}${word.toLowerCase()[0]}`,
+        );
+      }
+
       console.log(
         `Translated "${word}" to "${translatedWord.join(" ")}" (single syllable word)`,
       );
