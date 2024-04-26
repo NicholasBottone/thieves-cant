@@ -1,23 +1,84 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./App.css";
+
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
+
+import DragonBody from "./assets/dragon-body.png";
+import DragonHead from "./assets/dragon-head.png";
+import DragonTail from "./assets/dragon-tail.png";
 
 import { translateToEnglish, translateToThievesCant } from "./utils/translate";
 
 function App() {
-  const [input, setInput] = useState("");
+  const [translatingFromLanguage, setTranslatingFromLanguage] = useState<
+    "thieves' cant" | "english"
+  >("english");
+  const [inputText, setInputText] = useState("Enter text here...");
+  const [outputText, setOutputText] = useState("Translated text here...");
+
+  const translatingToLanguage =
+    translatingFromLanguage === "english" ? "thieves' cant" : "english";
+
+  /**
+   * Handler for input text area changes.
+   */
+  const handleInputTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(e.target.value);
+
+    if (translatingFromLanguage === "english") {
+      setOutputText(translateToThievesCant(inputText));
+    } else {
+      setOutputText(translateToEnglish(inputText));
+    }
+  };
+
+  /**
+   * Handler for switching the language to be translated.
+   */
+  const handleSwitchLanguages = () => {
+    setTranslatingFromLanguage(translatingToLanguage);
+    setInputText(outputText);
+    if (translatingFromLanguage === "english") {
+      setOutputText(translateToThievesCant(inputText));
+    } else {
+      setOutputText(translateToEnglish(inputText));
+    }
+  };
 
   return (
     <>
-      <h1>Thieve&rsquo;s Cant Translator</h1>
-      <textarea value={input} onChange={(e) => setInput(e.target.value)} />
-      <br />
-      <button onClick={() => setInput(translateToEnglish(input))}>
-        Translate to English
-      </button>
-      <button onClick={() => setInput(translateToThievesCant(input))}>
-        Translate to Thieve&rsquo;s Cant
-      </button>
-      <button onClick={() => setInput("")}>Clear</button>
+      <div className="header">
+        <h1>Thieves' Cant</h1>
+      </div>
+
+      <div className="translation-container">
+        <div className="dragon-images-container">
+          <img id="dragon-head" src={DragonHead} />
+          <img id="dragon-body" src={DragonBody} />
+          <img id="dragon-tail" src={DragonTail} />
+        </div>
+        <div className="translation-header-container">
+          <div className="left-header">{translatingFromLanguage}</div>
+          <div className="middle-header">
+            <FaArrowRightArrowLeft onClick={handleSwitchLanguages} />
+          </div>
+          <div className="right-header">{translatingToLanguage}</div>
+        </div>
+        <div className="translation-box-container">
+          <div className="translation-box" id="box-from">
+            <textarea
+              value={inputText}
+              onChange={handleInputTextChange}
+              className="input-text-area"
+            />
+          </div>
+          <div className="translation-box" id="box-to">
+            <p className="output-text-area">{outputText}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="rules-container">Rules</div> */}
     </>
   );
 }
