@@ -165,7 +165,7 @@ export const translateToThievesCant = (input: string) => {
       continue;
     }
 
-    const vowel = vowels[(syllables.length - 1) % vowels.length];
+    const vowel = vowels[(syllables.length - 2) % vowels.length];
     const lastSyllable = syllables[syllables.length - 1];
 
     for (let i = 0; i < syllables.length - 1; i++) {
@@ -205,9 +205,106 @@ export const translateToThievesCant = (input: string) => {
 };
 
 export const translateToEnglish = (input: string) => {
-  // TODO Implement the translation logic here
+  input = input.toUpperCase();
+  const words = input
+    .split(/(\s+|[.,!?])/)
+    .filter((word) => word.trim() && !/^[.,!?]$/.test(word));
+  const translatedWords: string[] = [];
+  const translationPairs: { start: string; end: string }[] = [];
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    console.log(`Translating "${word}"...`);
+    // if (!word.trim() || /^[.,!?]$/.test(word)) {
+    //   continue;
+    // }
+
+    const translatedWord = [];
+
+    // Handle pronouns
+    const englishPronoun = Object.keys(pronounMap).find(
+      (key) => pronounMap[key] === word,
+    );
+    if (englishPronoun) {
+      translatedWord.push(englishPronoun.toLowerCase());
+      console.log(
+        `Translated "${word}" to "${translatedWord.join("")}" (pronoun)`,
+      );
+      translatedWords.push(...translatedWord);
+      translationPairs.push({ start: word, end: translatedWord.join("") });
+      continue;
+    }
+
+    // Handle simple single syllable words
+    if (simpleSingleSyllableWords.includes(word)) {
+      translatedWord.push(word.toLowerCase());
+      console.log(
+        `Translated "${word}" to "${translatedWord.join("")}" (simple single syllable word)`,
+      );
+      translatedWords.push(...translatedWord);
+      translationPairs.push({ start: word, end: translatedWord.join("") });
+      continue;
+    }
+
+    // Other single syllable words
+    console.log(
+      `single syll test: ${word.slice(-1)}${word.substring(1, word.length - 1)}`,
+    );
+    console.log(
+      syllabify(`${word.slice(-1)}${word.substring(1, word.length - 1)}`),
+    );
+    console.log(word.charAt(0) === "y");
+    console.log(
+      syllabify(`${word.slice(-1)}${word.substring(1, word.length - 1)}`)
+        ?.length === 1,
+    );
+
+    if (
+      word.charAt(0) === "Y" &&
+      syllabify(`${word.slice(-1)}${word.substring(1, word.length - 1)}`)
+        ?.length === 1
+    ) {
+      translatedWord.push(
+        `${word.slice(-1)}${word.substring(1, word.length - 1)}`.toLowerCase(),
+      );
+      console.log(
+        `Translated "${word}" to "${translatedWord.join("")}" (single syllable word)`,
+      );
+      translatedWords.push(...translatedWord);
+      translationPairs.push({ start: word, end: translatedWord.join("") });
+      continue;
+    }
+
+    // Multi-syllable words
+    const firstSyllable = syllabify(word)[0];
+    translatedWord.push(firstSyllable.toLowerCase());
+
+    const vowel = words[++i];
+    word += ` ${vowel}`;
+    const wordsLeft = vowels.indexOf(vowel) + 1;
+    console.log(`Found vowel: ${vowel}, words left: ${wordsLeft}`);
+    for (let j = 0; j < wordsLeft; j++) {
+      const nextSyllable = syllabify(words[++i])[0];
+      word += ` ${nextSyllable}`;
+      // if last syllable
+      if (j === wordsLeft - 1) {
+        translatedWord.push(
+          nextSyllable.split("").reverse().join("").toLowerCase(),
+        );
+      } else {
+        translatedWord.push(nextSyllable.toLowerCase());
+      }
+    }
+
+    console.log(
+      `Translated "${word}" to "${translatedWord.join("")}" (multi-syllable word)`,
+    );
+    translatedWords.push(translatedWord.join(""));
+    translationPairs.push({ start: word, end: translatedWord.join("") });
+  }
+
   return {
-    translation: "Not implemented yet",
-    translationPairs: [{ start: input, end: "Not implemented yet" }],
+    translation: translatedWords.join(" "),
+    translationPairs,
   };
 };
