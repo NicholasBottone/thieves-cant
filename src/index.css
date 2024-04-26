@@ -56,7 +56,6 @@ label:focus,
 
 /* TRANSLATION CONTAINER */
 .translation-container {
-  border: 3px solid blue;
   height: 60vh;
   display: flex;
   flex-direction: column;
