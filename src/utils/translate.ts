@@ -124,7 +124,8 @@ export const translateToThievesCant = (input: string) => {
   }
 
   const words = input.split(/(\s+|[.,!?])/);
-  const translatedWords = [];
+  const translatedWords: string[] = [];
+  const translationPairs: { start: string; end: string }[] = [];
 
   for (const word of words) {
     console.log(`Translating "${word}"...`);
@@ -141,6 +142,7 @@ export const translateToThievesCant = (input: string) => {
         `Translated "${word}" to "${translatedWord.join(" ")}" (pronoun)`,
       );
       translatedWords.push(...translatedWord);
+      translationPairs.push({ start: word, end: translatedWord.join(" ") });
       continue;
     }
 
@@ -159,6 +161,7 @@ export const translateToThievesCant = (input: string) => {
         `Translated "${word}" to "${translatedWord.join(" ")}" (single syllable word)`,
       );
       translatedWords.push(...translatedWord);
+      translationPairs.push({ start: word, end: translatedWord.join(" ") });
       continue;
     }
 
@@ -188,16 +191,23 @@ export const translateToThievesCant = (input: string) => {
 
     console.log(`Translated "${word}" to "${translatedWord.join(" ")}"`);
     translatedWords.push(...translatedWord);
+    translationPairs.push({ start: word, end: translatedWord.join(" ") });
   }
 
   console.log(
     `Translated "${input}" to "${translatedWords.join(" ")}" (multi-syllable word)`,
   );
 
-  return translatedWords.join(" ");
+  return {
+    translation: translatedWords.join(" "),
+    translationPairs,
+  };
 };
 
 export const translateToEnglish = (input: string) => {
   // TODO Implement the translation logic here
-  return input;
+  return {
+    translation: "Not implemented yet",
+    translationPairs: [{ start: input, end: "Not implemented yet" }],
+  };
 };

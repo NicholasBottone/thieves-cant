@@ -9,12 +9,17 @@ import DragonTail from "./assets/dragon-tail.png";
 
 import { translateToEnglish, translateToThievesCant } from "./utils/translate";
 
+type Result = {
+  translation: string;
+  translationPairs: { start: string; end: string }[];
+};
+
 function App() {
   const [translatingFromLanguage, setTranslatingFromLanguage] = useState<
     "thieves' cant" | "english"
   >("english");
   const [inputText, setInputText] = useState("Enter text here...");
-  const [outputText, setOutputText] = useState("Translated text here...");
+  const [output, setOutput] = useState<Result>();
 
   const translatingToLanguage =
     translatingFromLanguage === "english" ? "thieves' cant" : "english";
@@ -26,9 +31,9 @@ function App() {
     setInputText(e.target.value);
 
     if (translatingFromLanguage === "english") {
-      setOutputText(translateToThievesCant(inputText));
+      setOutput(translateToThievesCant(inputText));
     } else {
-      setOutputText(translateToEnglish(inputText));
+      setOutput(translateToEnglish(inputText));
     }
   };
 
@@ -37,18 +42,18 @@ function App() {
    */
   const handleSwitchLanguages = () => {
     setTranslatingFromLanguage(translatingToLanguage);
-    setInputText(outputText);
+    setInputText(output?.translation ?? "");
     if (translatingFromLanguage === "english") {
-      setOutputText(translateToThievesCant(inputText));
+      setOutput(translateToThievesCant(inputText));
     } else {
-      setOutputText(translateToEnglish(inputText));
+      setOutput(translateToEnglish(inputText));
     }
   };
 
   return (
     <>
       <div className="header">
-        <h1>Thieves' Cant</h1>
+        <h1>Thieves&apos; Cant</h1>
       </div>
 
       <div className="translation-container">
@@ -73,7 +78,7 @@ function App() {
             />
           </div>
           <div className="translation-box" id="box-to">
-            <p className="output-text-area">{outputText}</p>
+            <p className="output-text-area">{output?.translation}</p>
           </div>
         </div>
       </div>
