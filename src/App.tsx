@@ -31,9 +31,9 @@ function App() {
   const handleInputTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
     if (translatingFromLanguage === "english") {
-      setOutput(translateToThievesCant(inputText));
+      setOutput(translateToThievesCant(e.target.value));
     } else {
-      setOutput(translateToEnglish(inputText));
+      setOutput(translateToEnglish(e.target.value));
     }
   };
 
