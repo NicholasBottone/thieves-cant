@@ -18,8 +18,6 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [output, setOutput] = useState<Result>();
 
-  console.log(output);
-
   const translatingToLanguage =
     translatingFromLanguage === "english" ? "thieves' cant" : "english";
 
@@ -41,10 +39,10 @@ function App() {
   const handleSwitchLanguages = () => {
     setTranslatingFromLanguage(translatingToLanguage);
     setInputText(output?.translation ?? "");
-    if (translatingFromLanguage === "english") {
-      setOutput(translateToThievesCant(inputText));
+    if (translatingToLanguage === "english") {
+      setOutput(translateToThievesCant(output?.translation ?? ""));
     } else {
-      setOutput(translateToEnglish(inputText));
+      setOutput(translateToEnglish(output?.translation ?? ""));
     }
   };
 
