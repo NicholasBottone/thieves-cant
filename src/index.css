@@ -54,7 +54,7 @@ label:focus,
 /* HEADER */
 .header {
   background-color: var(--primary-color);
-  height: 3rem;
+  height: 3.5rem;
   width: auto;
   display: flex;
   align-items: center;
@@ -79,14 +79,14 @@ label:focus,
   z-index: 20;
   position: absolute;
   height: 8rem;
-  top: 11.75%;
-  left: 10%;
+  top: 13.25%;
+  left: 13%;
 }
 
 #dragon-body {
   position: absolute;
   height: 8rem;
-  top: 54%;
+  top: 55%;
   left: 42.5%;
   z-index: -1;
 }
@@ -95,7 +95,7 @@ label:focus,
   transform: rotate(180deg);
   position: absolute;
   height: 8rem;
-  top: 8%;
+  top: 9.5%;
   left: 83%;
   z-index: -1;
 }
