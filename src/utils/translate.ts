@@ -153,7 +153,7 @@ export const translateToThievesCant = (input: string): Result => {
       console.log(`Could not syllabify "${word}"`);
       return {
         translation: "",
-        translationPairs: [],
+        translationPairs: [{ start: input, end: "" }],
         success: false,
       };
     }
@@ -296,7 +296,7 @@ export const translateToEnglish = (input: string): Result => {
       console.log(`Could not syllabify "${word}"`);
       return {
         translation: "",
-        translationPairs: [],
+        translationPairs: [{ start: input, end: "" }],
         success: false,
       };
     }
@@ -313,7 +313,7 @@ export const translateToEnglish = (input: string): Result => {
         console.log(`Could not syllabify "${word}"`);
         return {
           translation: "",
-          translationPairs: [],
+          translationPairs: [{ start: input, end: "" }],
           success: false,
         };
       }
