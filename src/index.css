@@ -58,10 +58,11 @@ label:focus,
   width: auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
 
   h1 {
     color: var(--text-primary);
-    padding: 0rem 1rem;
     text-transform: uppercase;
   }
 }

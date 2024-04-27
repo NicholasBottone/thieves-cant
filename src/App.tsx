@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from "react";
-import "./App.css";
 
-import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import { FaArrowRightArrowLeft, FaGithub } from "react-icons/fa6";
 import { MdClear } from "react-icons/md";
 
 import DragonBody from "./assets/dragon-body.png";
@@ -64,6 +63,9 @@ function App() {
     <>
       <div className="header">
         <h1>Thieves&apos; Cant</h1>
+        <a href="https://github.com/NicholasBottone/thieves-cant">
+          <FaGithub color="white" size={24} />
+        </a>
       </div>
 
       <div className="translation-container">
