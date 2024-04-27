@@ -186,9 +186,6 @@ function App() {
             </ol>
             <strong>Contractions: </strong>Thieves' cant does not support
             contractions. Expand all contractions to their unabbreviated forms.
-            <br />
-            <br />
-            <strong>Words With One Syllable: </strong>Andrew is awesome!
           </ReactSpoiler>
         </div>
       </div>
