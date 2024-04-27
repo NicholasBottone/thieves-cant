@@ -11,6 +11,7 @@ import DragonTail from "./assets/dragon-tail.png";
 import { translateToEnglish, translateToThievesCant } from "./utils/translate";
 import type { Result } from "./utils/result";
 
+// @ts-expect-error - ReactSpoiler is not typed
 import ReactSpoiler from "react-spoiler";
 
 function App() {
@@ -148,8 +149,8 @@ function App() {
         </div>
         <div className="rules-content-container">
           <ReactSpoiler
-            blur={4}
-            hoverBlur={2.5}
+            blur={5}
+            hoverBlur={3}
             style={{
               cursor: "pointer",
             }}
@@ -184,7 +185,7 @@ function App() {
               </li>
               <li>The new encoded words must have more than one syllable</li>
             </ol>
-            <strong>Contractions: </strong>Thieves' cant does not support
+            <strong>Contractions: </strong>Thieves&apos; cant does not support
             contractions. Expand all contractions to their unabbreviated forms.
           </ReactSpoiler>
         </div>
