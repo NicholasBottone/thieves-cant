@@ -12,6 +12,7 @@ import { translateToEnglish, translateToThievesCant } from "./utils/translate";
 import type { Result } from "./utils/result";
 
 function App() {
+  const [highlightWordIndex, setHighlightWordIndex] = useState<number>();
   const [translatingFromLanguage, setTranslatingFromLanguage] = useState<
     "thieves' cant" | "english"
   >("english");
@@ -54,6 +55,8 @@ function App() {
     setOutput(undefined);
   };
 
+  const highlightColorCodes = ["#ce5047", "#ce8f47"]; //, "#B42F1B", "#40B41B", "#1B88B4"];
+
   return (
     <>
       <div className="header">
@@ -73,12 +76,38 @@ function App() {
         </div>
         <div className="translation-box-container">
           <div className="translation-box" id="box-from">
-            <textarea
-              placeholder="Enter text here..."
-              value={inputText}
-              onChange={handleInputTextChange}
-              className="input-text-area"
-            />
+            <div className="translation-text-container">
+              <textarea
+                placeholder="Enter text here..."
+                value={inputText}
+                onChange={handleInputTextChange}
+                className="input-text-area"
+              />
+              {inputText && (
+                <div className="text-display">
+                  {output?.translationPairs.map(({ start: word }, index) => (
+                    <>
+                      <span
+                        key={index}
+                        className="word-span"
+                        onMouseEnter={() => setHighlightWordIndex(index)}
+                        onMouseLeave={() => setHighlightWordIndex(undefined)}
+                        style={{
+                          backgroundColor:
+                            highlightWordIndex === index
+                              ? highlightColorCodes[
+                                  index % highlightColorCodes.length
+                                ]
+                              : "transparent",
+                        }}
+                      >
+                        {word.toLowerCase()}
+                      </span>{" "}
+                    </>
+                  ))}
+                </div>
+              )}
+            </div>
             {inputText && (
               <MdClear
                 className="clear-icon"
@@ -88,7 +117,25 @@ function App() {
             )}
           </div>
           <div className="translation-box" id="box-to">
-            <p className="output-text-area">{output?.translation}</p>
+            <p className="output-text-area">
+              {output?.translationPairs.map((word, index) => (
+                <>
+                  <span
+                    key={index}
+                    style={{
+                      backgroundColor:
+                        highlightWordIndex === index
+                          ? highlightColorCodes[
+                              index % highlightColorCodes.length
+                            ]
+                          : "transparent",
+                    }}
+                  >
+                    {word.end.toLowerCase()}
+                  </span>{" "}
+                </>
+              ))}
+            </p>
           </div>
         </div>
       </div>
