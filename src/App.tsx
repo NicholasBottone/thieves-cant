@@ -11,6 +11,8 @@ import DragonTail from "./assets/dragon-tail.png";
 import { translateToEnglish, translateToThievesCant } from "./utils/translate";
 import type { Result } from "./utils/result";
 
+import ReactSpoiler from "react-spoiler";
+
 function App() {
   const [highlightWordIndex, setHighlightWordIndex] = useState<number>();
   const [translatingFromLanguage, setTranslatingFromLanguage] = useState<
@@ -145,9 +147,49 @@ function App() {
           <h2>Rules</h2>
         </div>
         <div className="rules-content-container">
-          Rule 1: Pronouns are cool!
-          <br />
-          Rule 2: Andrew is awesome!
+          <ReactSpoiler
+            blur={4}
+            hoverBlur={2.5}
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            <strong>Pronouns: </strong>Pronouns are mapped to the following:
+            <ul>
+              <li>I/Me → HUUUE</li>
+              <li>You/Yours → HIII</li>
+              <li>He/Him → HEEE</li>
+              <li>She/Her → HAAA</li>
+              <li>It/This/That → HYOH</li>
+              <li>We/Us → HOOO</li>
+              <li>They/Them → HYUH</li>
+            </ul>
+            <strong>Words With One Syllable: </strong>Add the letter “Y” before
+            the one syllable word, then take the first letter and move it to the
+            end.
+            <br />
+            <br />
+            <strong>Words With Multiple Syllable: </strong>
+            <ol>
+              <li>
+                Take first syllable and find English word that contains it
+              </li>
+              <li>
+                Give vowel filler to indicate how many syllables are left in
+                original word. Vowel filler: A = 1, E = 2, C = 3 ...
+              </li>
+              <li>
+                Find English word for every other syllable unless it is the last
+                one, in which case it is always the last syllable
+              </li>
+              <li>The new encoded words must have more than one syllable</li>
+            </ol>
+            <strong>Contractions: </strong>Thieves' cant does not support
+            contractions. Expand all contractions to their unabbreviated forms.
+            <br />
+            <br />
+            <strong>Words With One Syllable: </strong>Andrew is awesome!
+          </ReactSpoiler>
         </div>
       </div>
     </>
