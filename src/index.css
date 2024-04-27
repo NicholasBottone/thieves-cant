@@ -115,6 +115,9 @@ label:focus,
   }
 
   .middle-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     width: 4%;
     cursor: pointer;
