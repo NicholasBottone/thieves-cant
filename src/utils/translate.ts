@@ -198,13 +198,8 @@ export const translateToThievesCant = (input: string): Result => {
       }
     }
 
-    // reverse the last syllable
-    const reversedLastSyllable = lastSyllable
-      .toLowerCase()
-      .split("")
-      .reverse()
-      .join("");
-    translatedWord.push(reversedLastSyllable);
+    // keep the last syllable
+    translatedWord.push(lastSyllable.toLowerCase());
 
     console.log(`Translated "${word}" to "${translatedWord.join(" ")}"`);
     translatedWords.push(...translatedWord);
@@ -319,14 +314,7 @@ export const translateToEnglish = (input: string): Result => {
       }
       const nextSyllable = syllables[0];
       word += ` ${nextSyllable}`;
-      // if last syllable
-      if (j === wordsLeft - 1) {
-        translatedWord.push(
-          nextSyllable.split("").reverse().join("").toLowerCase(),
-        );
-      } else {
-        translatedWord.push(nextSyllable.toLowerCase());
-      }
+      translatedWord.push(nextSyllable.toLowerCase());
     }
 
     console.log(
