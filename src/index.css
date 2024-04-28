@@ -12,12 +12,6 @@
   --font-size-tertiary: 1.25rem;
 }
 
-@font-face {
-  font-family: 'TaylorGothic';
-  src: local('TaylorGothic'), url(src/assets/font/TaylorGothic.otf) format('opentype');
-}
-
-
 body {
   margin: 0;
   background-color: var(--secondary-color);
@@ -69,8 +63,8 @@ label:focus,
   padding: 0 2rem;
 
   h1 {
-    font-family: TaylorGothic, Arial, sans-serif;
-    font-size: 3rem;
+    font-family: "Jacquard 24", system-ui;
+    font-size: 4rem;
     color: var(--text-secondary);
     /* text-transform: uppercase; */
   }
@@ -123,7 +117,7 @@ label:focus,
     width: 48%;
     padding-left: 20px;
     font-size: var(--font-size-secondary);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   }
 
   .middle-header {
@@ -140,7 +134,7 @@ label:focus,
     width: 48%;
     padding-left: 20px;
     font-size: var(--font-size-secondary);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   }
 }
 
@@ -237,7 +231,7 @@ label:focus,
   padding: 5px 10px;
 
   h2 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     color: var(--text-secondary);
     text-transform: uppercase;
   }
