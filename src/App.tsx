@@ -57,14 +57,15 @@ function App() {
     setOutput(undefined);
   };
 
-  const highlightColorCodes = ["#ce5047", "#ce8f47"]; //, "#B42F1B", "#40B41B", "#1B88B4"];
+  const highlightColorCodes = ["#f18676", "#e8ba59"]; //, "#B42F1B", "#40B41B", "#1B88B4"];
 
   return (
     <>
       <div className="header">
-        <h1>Thieves&apos; Cant</h1>
+        <h1> </h1>
+        <h1>Thieves&apos; Cant Translator</h1>
         <a href="https://github.com/NicholasBottone/thieves-cant">
-          <FaGithub color="white" size={24} />
+          <FaGithub color="#718c7e" size={30} />
         </a>
       </div>
 

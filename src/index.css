@@ -1,15 +1,22 @@
 :root {
-  --primary-color: #15616d;
-  --secondary-color: #cdd6d0;
+  --primary-color: #f3f7f7;
+  --secondary-color: #718c7e;
+  --tertiary-color: #7da8c3;
 
   --text-primary: #ffffff;
-  --text-secondary: #000000;
-  --text-tertiary: #d5d5d5;
+  --text-secondary: #718c7e;
+  --text-tertiary: #525252;
 
   --font-size-primary: 2rem;
   --font-size-secondary: 1.5rem;
   --font-size-tertiary: 1.25rem;
 }
+
+@font-face {
+  font-family: 'TaylorGothic';
+  src: local('TaylorGothic'), url(src/assets/font/TaylorGothic.otf) format('opentype');
+}
+
 
 body {
   margin: 0;
@@ -54,7 +61,7 @@ label:focus,
 /* HEADER */
 .header {
   background-color: var(--primary-color);
-  height: 3.5rem;
+  height: 7rem;
   width: auto;
   display: flex;
   align-items: center;
@@ -62,8 +69,10 @@ label:focus,
   padding: 0 2rem;
 
   h1 {
-    color: var(--text-primary);
-    text-transform: uppercase;
+    font-family: TaylorGothic, Arial, sans-serif;
+    font-size: 3rem;
+    color: var(--text-secondary);
+    /* text-transform: uppercase; */
   }
 }
 
@@ -79,16 +88,17 @@ label:focus,
   pointer-events: none;
   z-index: 20;
   position: absolute;
-  height: 8rem;
-  top: 13.25%;
+  height: 10rem;
+  top: 17.26%;
   left: 13%;
 }
 
 #dragon-body {
   position: absolute;
   height: 8rem;
-  top: 55%;
-  left: 42.5%;
+  width: 18rem;
+  top: 60%;
+  left: 40.5%;
   z-index: -1;
 }
 
@@ -96,8 +106,8 @@ label:focus,
   transform: rotate(180deg);
   position: absolute;
   height: 8rem;
-  top: 9.5%;
-  left: 83%;
+  top: 17.26%;
+  left: 82%;
   z-index: -1;
 }
 
@@ -107,12 +117,13 @@ label:focus,
   justify-content: space-between;
   margin: 6rem 2rem 0;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 
   .left-header {
     width: 48%;
     padding-left: 20px;
     font-size: var(--font-size-secondary);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 
   .middle-header {
@@ -129,6 +140,7 @@ label:focus,
     width: 48%;
     padding-left: 20px;
     font-size: var(--font-size-secondary);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 }
 
@@ -147,7 +159,7 @@ label:focus,
   height: 100%;
   width: 100%;
   border-radius: 1rem;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
   display: flex;
 }
 
@@ -182,7 +194,7 @@ label:focus,
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
   z-index: 2;
   pointer-events: none;
 }
@@ -225,13 +237,16 @@ label:focus,
   padding: 5px 10px;
 
   h2 {
-    color: var(--text-primary);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: var(--text-secondary);
     text-transform: uppercase;
   }
 }
 
 .rules-content-container {
-  border: 3px solid var(--primary-color);
+  border-top: 3px solid var(--secondary-color);
+  background-color: var(--primary-color);
   padding: 12px 20px;
   font-size: var(--font-size-tertiary);
+  color: var(--text-tertiary);
 }
